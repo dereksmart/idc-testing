@@ -9,6 +9,10 @@ add_filter( 'jetpack_sync_idc_optin', '__return_true' );
 
 add_action( 'admin_init', 'idc_testing_admin_init' );
 function idc_testing_admin_init() {
+	if ( ! class_exists( 'Jetpack' ) ) {
+		return;
+	}
+
 	$url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 	$url = parse_url( $url, PHP_URL_PATH );
 	if ( isset( $_GET[ 'trigger-idc' ] ) ) {
